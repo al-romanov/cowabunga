@@ -9,12 +9,6 @@
 
 namespace cb {
 
-class EofTokenizer final : public lexer::ITokenizer {
-public:
-  std::pair<common::Token, std::string>
-  tokenize(std::string_view Word) override;
-};
-
 class IdentifierTokenizer : public lexer::ITokenizer {
 public:
   std::pair<common::Token, std::string>

@@ -11,11 +11,13 @@ include_directories(common/include)
 add_subdirectory(lexer)
 include_directories(lexer/include)
 
+add_subdirectory(parser)
+include_directories(parser/include)
+
 file(GLOB DRIVER_SRCS "cbc/*.cpp")
 include_directories(cbc)
 add_executable(cbc ${DRIVER_SRCS})
 
-target_link_libraries(lexer common)
-target_link_libraries(cbc common lexer)
+target_link_libraries(cbc common lexer parser)
 
 target_compile_features(cbc PUBLIC cxx_std_17)

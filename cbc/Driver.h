@@ -4,7 +4,7 @@
 namespace cb {
 
 enum TokenId {
-  Eof,
+  EndOfFile,
   Identifier,
   IntegralNumber,
   ExpressionSeparator,
@@ -13,13 +13,16 @@ enum TokenId {
   Assignment,
   Plus,
   Minus,
+  Multiplication,
   ShiftLeft,
   ShiftRight,
   BinaryOperatorsRangeEnd,
   Definition,
   ExternalDeclaration,
   BodyBegin,
-  BodyEnd
+  BodyEnd,
+  OpenParantheses,
+  CloseParantheses
 };
 
 enum TokenPriority { Unmatched = 0, Normal = 1, High = 2 };

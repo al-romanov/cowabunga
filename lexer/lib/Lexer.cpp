@@ -42,6 +42,9 @@ Lexer::produceTokens(std::istream &Input) {
       Offset = 0;
       WordView = std::string_view(Word.c_str());
     }
+    if (WordView.empty()) {
+      return Tokens;
+    }
     auto Result = findBestToken(WordView);
     if (!Result.first) {
       return std::nullopt;
