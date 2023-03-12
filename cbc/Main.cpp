@@ -1,4 +1,5 @@
 #include "Driver.h"
+#include "Parsers.h"
 #include "Tokenizers.h"
 #include "lexer/Lexer.h"
 
@@ -9,15 +10,10 @@ using namespace cb;
 
 int main(int argc, char **argv) {
   lexer::Lexer Lexer{};
-  Lexer.addTokenizer(EofTokenizer())
-      .addTokenizer(IntegralNumberTokenizer())
+  Lexer.addTokenizer(IntegralNumberTokenizer())
       .addTokenizer(IdentifierTokenizer())
-      .addTokenizer(KeywordTokenizer(Assignment, "="))
-      .addTokenizer(KeywordTokenizer(Plus, "+"))
-      .addTokenizer(KeywordTokenizer(Minus, "-"))
-      .addTokenizer(KeywordTokenizer(ShiftLeft, "<<"))
-      .addTokenizer(KeywordTokenizer(ShiftRight, ">>"))
-      .addTokenizer(KeywordTokenizer(ExpressionSeparator, ";"));
+      .addTokenizer(KeywordTokenizer(ExpressionSeparator, ";"))
+      .addTokenizer(KeywordTokenizer(Plus, "+"));
 
   std::ifstream Script;
   if (argc == 2) {
@@ -29,9 +25,17 @@ int main(int argc, char **argv) {
   auto Tokens = Lexer.produceTokens(Script);
   if (!Tokens) {
     std::cerr << "Failed to parse input file" << std::endl;
+    exit(1);
   }
   for (auto &Token : *Tokens) {
     std::cout << Token << std::endl;
+  }
+  ExpressionParser Parser;
+  auto It = Parser.match(Tokens->cbegin(), Tokens->cend());
+  if (It == Tokens->cend()) {
+    std::cout << "Congrats!" << std::endl;
+  } else {
+    std::cout << "Fail!" << std::endl;
   }
   return 0;
 }

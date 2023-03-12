@@ -25,10 +25,15 @@ bool Token::less(const Token &RHS) const noexcept {
 }
 
 void Token::print(std::ostream &Out) const {
-  Out << "Token { " << Metadata.get(common::Stringified) << ", " << Id << "}";
+  Out << "Token {" << MetadataStorage.get(common::Stringified) << ", " << Id
+      << "}";
 }
 
-common::Metadata &Token::metadata() noexcept { return Metadata; }
+common::Metadata &Token::metadata() noexcept { return MetadataStorage; }
+
+std::string Token::metadata(MetadataType Type) const {
+  return MetadataStorage.get(Type);
+}
 
 int Token::id() const noexcept { return Id; }
 

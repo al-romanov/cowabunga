@@ -26,6 +26,8 @@ public:
 
   common::Metadata &metadata() noexcept;
 
+  std::string metadata(MetadataType Type) const;
+
   int id() const noexcept;
 
   int priority() const noexcept;
@@ -35,7 +37,7 @@ public:
   operator bool() const noexcept;
 
 private:
-  common::Metadata Metadata;
+  common::Metadata MetadataStorage;
   int Id;
   int Priority;
   bool Initialized;

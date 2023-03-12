@@ -8,15 +8,6 @@
 namespace cb {
 
 std::pair<common::Token, std::string>
-EofTokenizer::tokenize(std::string_view Word) {
-  if (!Word.empty()) {
-    return std::make_pair(common::Token(), "");
-  }
-  auto Result = common::Token(TokenId::Eof, TokenPriority::High);
-  return std::make_pair(Result, "EOF");
-}
-
-std::pair<common::Token, std::string>
 IdentifierTokenizer::tokenize(std::string_view Word) {
   auto *It = Word.cbegin();
   bool Match = It != Word.cend() && (std::isalpha(*It) || *It == '_');
