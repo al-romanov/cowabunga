@@ -9,38 +9,13 @@
 
 namespace kaleidoc {
 
-enum TokenId {
-  kEof,
-  kIdentifier,
-  kIntegralNumber,
-  kExpressionSeparator,
-  kArgumentSeparator,
-  kBinaryOperatorsRangeBegin,
-  kAssignment,
-  kPlus,
-  kMinus,
-  kShiftLeft,
-  kShiftRight,
-  kBinaryOperatorsRangeEnd,
-  kDefinition,
-  kExternalDeclaration,
-  kBodyBegin,
-  kBodyEnd
-};
 
-enum TokenPriority { kUnmatched = 0, kNormal = 1, kHigh = 2 };
 
 enum MetadataType {
   kStringified,
 };  // Not implemented yet
 
-enum OperatorId {
-  kAssignmentOp = TokenId::kAssignment,
-  kPlusOp = TokenId::kPlus,
-  kMinusOp = TokenId::kMinus,
-  kShiftLeftOp = TokenId::kShiftLeft,
-  kShiftRightOp = TokenId::kShiftRight
-};
+
 
 enum OperatorAssociativity { kLeftToRight, kRightToLeft };
 
@@ -63,12 +38,7 @@ class IPrintable {
 
 class Token;
 
-class Tokenizer : public IClonable<Tokenizer> {
- public:
-  virtual Token Tokenize(std::string_view word) const = 0;
 
-  virtual ~Tokenizer() = default;
-};
 
 class Lexer {
  public:
